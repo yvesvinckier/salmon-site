@@ -1,5 +1,7 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
+import Img from 'gatsby-image'
+
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
@@ -138,6 +140,138 @@ const IntroHome = styled.div`
   }
 `
 
+const PostOuterWrapper = styled.div`
+  z-index: 2;
+  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      z-index: -2;
+      width: 0;
+      height: 100vh;
+      background: transparent;
+    }
+  }
+`
+
+const PostInnerWrapper = styled.div`
+  width: 100%;
+  background: ${props => props.theme.colors.white};
+`
+
+const PostInfo = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: calc(100% - 2em);
+  max-width: 1000px;
+  padding: 2em;
+  margin: 0 1em;
+  background: ${props => props.theme.colors.white};
+  position: relative;
+  @media screen and (min-width: ${props => props.theme.responsive.small}) {
+    padding: 7em 2em;
+    margin: 0 auto;
+    width: calc(100% - 4em);
+  }
+  .post-info__left {
+    background: black;
+    margin: 0 0 1em 0;
+    width: 100%;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      margin: 0;
+      flex: 0 1 45%;
+    }
+  }
+  .post-info__right {
+    width: 100%;
+    color: black;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      flex: 0 1 45%;
+    }
+    svg {
+      width: 3em;
+      .blackStroke {
+        fill: none;
+        stroke: #020203;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+    }
+
+    h3 {
+      padding-top: 15px;
+      letter-spacing: 0.10526em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      line-height: 1.3rem;
+    }
+    h4 {
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+    h2 {
+      letter-spacing: 0.10526em;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: 100;
+      line-height: 1.2rem;
+      margin-top: 0.4rem;
+    }
+    p {
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.2rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+    a {
+      display: inline-block;
+      padding-left: 85px;
+      position: relative;
+      font-weight: 500;
+      transition: 0.708s ease-out 0.108s;
+      font-size: 0.89474rem;
+      line-height: 1.36842rem;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      text-transform: uppercase;
+      &::before {
+        transition: 0.6s ease-out;
+        content: '';
+        display: inline-block;
+        width: 72px;
+        height: 1px;
+        background-color: #374818;
+        position: absolute;
+        top: 50%;
+        left: 0;
+      }
+    }
+    a:hover {
+      padding-left: 0;
+    }
+    a:hover::before {
+      width: 0;
+    }
+  }
+`
+
+const PageDividerWrapper = styled.div`
+  position: relative;
+  margin: 4rem 0 2rem;
+  width: 100%;
+  z-index: 4;
+  div {
+    max-height: 100vh;
+  }
+`
+
 const IndexPage = ({ data }) => {
   const page = data.contentfulMowi
   return (
@@ -231,6 +365,184 @@ const IndexPage = ({ data }) => {
           <span className="home-scroll-invite__label">Scroll</span>
         </div>
       </IntroHome>
+      <PostOuterWrapper>
+        <PostInnerWrapper>
+          <PostInfo>
+            <div className="post-info__left">
+              <Img fluid={page.images[0].fluid} alt={page.images[0].title} />
+            </div>
+            <div className="post-info__right">
+              <svg
+                version="1.1"
+                id="Calque_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 89.32 50.74"
+              >
+                <path
+                  className="blackStroke"
+                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+              </svg>
+              <h3>L’élevage</h3>
+              <h4>Unique</h4>
+              <h2>parce que nous élevons nos Saumons avec soin</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
+              </p>
+              <Link>Notre process d’élevage</Link>
+            </div>
+          </PostInfo>
+          <PostInfo>
+            <div className="post-info__left">
+              <Img fluid={page.images[1].fluid} alt={page.images[1].title} />
+            </div>
+            <div className="post-info__right">
+              <svg
+                version="1.1"
+                id="Calque_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 89.32 50.74"
+              >
+                <path
+                  className="blackStroke"
+                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+              </svg>
+              <h3>Bien-être</h3>
+              <h4>Healthy</h4>
+              <h2>Nos Saumonssont un bienfait pour notre organisme </h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
+              </p>
+              <Link>Les bienfaits du saumon</Link>
+            </div>
+          </PostInfo>
+          <PostInfo>
+            <div className="post-info__left">
+              <Img fluid={page.images[2].fluid} alt={page.images[2].title} />
+            </div>
+            <div className="post-info__right">
+              <svg
+                version="1.1"
+                id="Calque_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 89.32 50.74"
+              >
+                <path
+                  className="blackStroke"
+                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+                <path
+                  className="blackStroke"
+                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+                />
+              </svg>
+              <h3>Inspiration du moment</h3>
+              <h4>Dégustations</h4>
+              <h2>DES INSPIRATIONS POUR DÉGUSTER LE SAUMON TOUTE L’ANNÉE</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
+              </p>
+              <Link>DÉCOUVREZ NOS RECETTES DU MOMENT</Link>
+            </div>
+          </PostInfo>
+          <PageDividerWrapper>
+            <BgImg height={'100vh'} fluid={page.pageDivider.fluid} />
+          </PageDividerWrapper>
+        </PostInnerWrapper>
+      </PostOuterWrapper>
     </Layout>
   )
 }
@@ -240,6 +552,17 @@ export const query = graphql`
     contentfulMowi {
       cover {
         title
+        fluid(maxWidth: 1800) {
+          ...GatsbyContentfulFluid_withWebp_noBase64
+        }
+      }
+      images {
+        title
+        fluid(maxWidth: 1800) {
+          ...GatsbyContentfulFluid_withWebp_noBase64
+        }
+      }
+      pageDivider {
         fluid(maxWidth: 1800) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
