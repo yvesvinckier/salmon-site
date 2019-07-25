@@ -20,6 +20,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-spring": "^8.0.27",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
@@ -39,6 +40,9 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "lint:js": "eslint --ext .js,.jsx .",
+    "lint:css": "stylelint 'src/**/*.js'",
+    "check-pretty": "prettier -l {,src/**/}*.{js,jsx,json,css,scss}",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",

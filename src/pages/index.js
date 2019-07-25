@@ -16,90 +16,89 @@ const IntroHome = styled.div`
   }
 
   width: 100%;
-    svg {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8em;
-      z-index: 2;
-      @media screen and (min-width: ${props => props.theme.responsive.small}) {
-        width: 34em;
-      }
-      .strokeFill {
-        fill:none;
-        stroke:#FFFFFF;
-        stroke-width:13.3037;
-        stroke-miterlimit:10;
-      }
-      .whiteFill {
-        fill:#FFFFFF;
-      }
+  svg {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8em;
+    z-index: 2;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      width: 34em;
     }
-    div {
-      max-height: 100vh;
+    .strokeFill {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 13.3037;
+      stroke-miterlimit: 10;
     }
-    &::before {
-      content: '';
-      background: rgba(0, 0, 0, 0.3);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 1;
+    .whiteFill {
+      fill: #fff;
     }
-    h1 {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      width: 100%;
-      line-height: 1.6em;
-      text-align: center;
-      font-weight: 300;
-      font-size: 0.7em;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      @media screen and (min-width: ${props => props.theme.responsive.small}) {
-        top: 68%;
-        font-size: 1.5em;
-      }
+  }
+  div {
+    max-height: 100vh;
+  }
+  &::before {
+    content: '';
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+  h1 {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    line-height: 1.6em;
+    text-align: center;
+    font-weight: 300;
+    font-size: 0.7em;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      top: 68%;
+      font-size: 1.5em;
     }
-    .home-scroll-invite {
-      pointer-events: none;
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      width: 100%;
-      z-index: 2;
-      text-align: center;
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
+  }
+  .home-scroll-invite {
+    pointer-events: none;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
 
-    .home-scroll-invite__label {
-      margin-top: 34px;
-      display: inline-block;
-      color: #fff;
-      text-transform: uppercase;
-      margin-bottom: 1em;
-      font-family: 'FuturaStd-Book', sans-serif;
-      font-weight: normal;
-      font-style: normal;
-      letter-spacing: 0.1em;
-      letter-spacing: 0.2em;
-      font-size: 8px;
-      transform: rotate(90deg);
-      transform-origin: center center;
-      position: relative;
-      left: -1px;
-      @media screen and (min-width: ${props => props.theme.responsive.small}) {
-        font-size: 10px;
-      }
+  .home-scroll-invite__label {
+    margin-top: 34px;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    font-family: 'FuturaStd-Book', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    letter-spacing: 0.2em;
+    font-size: 8px;
+    transform: rotate(90deg);
+    transform-origin: center center;
+    position: relative;
+    left: -1px;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      font-size: 10px;
     }
   }
 
@@ -156,6 +155,7 @@ const PostOuterWrapper = styled.div`
 `
 
 const PostInnerWrapper = styled.div`
+  padding-top: 10rem;
   width: 100%;
   background: ${props => props.theme.colors.white};
 `
@@ -176,9 +176,14 @@ const PostInfo = styled.div`
     width: calc(100% - 4em);
   }
   .post-info__left {
-    background: black;
     margin: 0 0 1em 0;
     width: 100%;
+    height: 385px;
+    div {
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       margin: 0;
       flex: 0 1 45%;
@@ -203,6 +208,7 @@ const PostInfo = styled.div`
 
     h3 {
       padding-top: 15px;
+      padding-bottom: 15px;
       letter-spacing: 0.10526em;
       text-transform: uppercase;
       font-size: 0.8rem;
@@ -215,20 +221,23 @@ const PostInfo = styled.div`
       line-height: 2rem;
     }
     h2 {
+      padding-top: 0.2rem;
+      padding-bottom: 15px;
       letter-spacing: 0.10526em;
       text-transform: uppercase;
-      font-size: 1.2rem;
-      font-weight: 100;
-      line-height: 1.2rem;
+      font-size: 1.6rem;
+      font-weight: 200;
+      line-height: 1.6rem;
       margin-top: 0.4rem;
     }
     p {
       letter-spacing: 0.05em;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.2rem;
+      line-height: 1.3rem;
       margin-top: 0.4rem;
       margin-bottom: 0.8rem;
+      padding-bottom: 2rem;
     }
     a {
       display: inline-block;
@@ -264,11 +273,131 @@ const PostInfo = styled.div`
 
 const PageDividerWrapper = styled.div`
   position: relative;
-  margin: 4rem 0 2rem;
+  margin: 4rem 0 0;
   width: 100%;
   z-index: 4;
+  text-align: center;
   div {
     max-height: 100vh;
+  }
+  svg {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3em;
+    z-index: 2;
+
+    .blackStroke {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-miterlimit: 10;
+    }
+  }
+  h3 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    padding-top: 15px;
+    letter-spacing: 0.10526em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+  }
+  h4 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+  h2 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 30%;
+    padding-top: 0.2rem;
+    letter-spacing: 0.10526em;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 200;
+    line-height: 1.8rem;
+    margin-top: 0.4rem;
+  }
+  p {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 30%;
+    letter-spacing: 0.05em;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.3rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+  .logoWrapper {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8em;
+    z-index: 2;
+    @media screen and (min-width: ${props => props.theme.responsive.small}) {
+      width: 12em;
+    }
+  }
+  a {
+    color: #fff;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: inline-block;
+    font-weight: 500;
+    transition: 0.708s ease-out 0.108s;
+    font-size: 0.89474rem;
+    line-height: 1.36842rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    &::before {
+      transition: 0.6s ease-out;
+      content: '';
+      display: inline-block;
+      width: 72px;
+      height: 1px;
+      background-color: #fff;
+      position: absolute;
+      top: 50%;
+      left: -84px;
+    }
+    &::after {
+      transition: 0.6s ease-out;
+      content: '';
+      display: inline-block;
+      width: 72px;
+      height: 1px;
+      background-color: #fff;
+      position: absolute;
+      top: 50%;
+      right: -84px;
+    }
   }
 `
 
@@ -540,6 +669,59 @@ const IndexPage = ({ data }) => {
           </PostInfo>
           <PageDividerWrapper>
             <BgImg height={'100vh'} fluid={page.pageDivider.fluid} />
+            <svg
+              version="1.1"
+              id="Calque_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 89.32 50.74"
+            >
+              <path
+                className="blackStroke"
+                d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+              />
+              <path
+                className="blackStroke"
+                d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+              />
+              <path
+                className="blackStroke"
+                d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+              />
+              <path
+                className="blackStroke"
+                d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+              />
+              <path
+                className="blackStroke"
+                d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
+	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
+	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
+              />
+            </svg>
+            <h3>Engagement</h3>
+            <h4>Respect</h4>
+            <h2>L'impact sur l'environnement est une préoccupation majeure</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+              tation ullamcorper suscipit lobortis nisl ut.
+            </p>
+            <div className="logoWrapper">
+              <Img fluid={page.logo.fluid} alt={page.logo.title} />
+            </div>
+            <Link>DÉCOUVREZ NOS ENGAGEMENTS</Link>
           </PageDividerWrapper>
         </PostInnerWrapper>
       </PostOuterWrapper>
@@ -564,6 +746,11 @@ export const query = graphql`
       }
       pageDivider {
         fluid(maxWidth: 1800) {
+          ...GatsbyContentfulFluid_withWebp_noBase64
+        }
+      }
+      logo {
+        fluid(maxWidth: 400) {
           ...GatsbyContentfulFluid_withWebp_noBase64
         }
       }

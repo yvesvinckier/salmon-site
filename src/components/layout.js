@@ -11,6 +11,7 @@ import Helmet from 'react-helmet'
 import { ThemeProvider } from 'styled-components'
 import theme from '../styles/theme'
 import GlobalStyle from '../styles/global'
+import Footer from './Footer'
 
 class Layout extends React.Component {
   render() {
@@ -27,7 +28,10 @@ class Layout extends React.Component {
             />
           </Helmet>
 
-          <section role="main">{children}</section>
+          <section role="main">
+            {children}
+            <Footer />
+          </section>
           <GlobalStyle />
         </div>
       </ThemeProvider>
