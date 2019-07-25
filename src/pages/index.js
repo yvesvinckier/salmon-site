@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
+import Helmet from 'react-helmet'
 
 import styled from 'styled-components'
 
@@ -405,6 +406,9 @@ const IndexPage = ({ data }) => {
   const page = data.contentfulMowi
   return (
     <Layout>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <SEO title="Home" />
       <IntroHome>
         <BgImg
