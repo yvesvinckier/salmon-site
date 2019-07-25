@@ -550,7 +550,7 @@ const IndexPage = ({ data }) => {
                 aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
                 nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
               </p>
-              <Link>Notre process d’élevage</Link>
+              <Link to="/">Notre process d’élevage</Link>
             </div>
           </PostInfo>
           <PostInfo>
@@ -607,7 +607,7 @@ const IndexPage = ({ data }) => {
                 aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
                 nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
               </p>
-              <Link>Les bienfaits du saumon</Link>
+              <Link to="/">Les bienfaits du saumon</Link>
             </div>
           </PostInfo>
           <PostInfo>
@@ -664,7 +664,7 @@ const IndexPage = ({ data }) => {
                 aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
                 nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
               </p>
-              <Link>DÉCOUVREZ NOS RECETTES DU MOMENT</Link>
+              <Link to="/">DÉCOUVREZ NOS RECETTES DU MOMENT</Link>
             </div>
           </PostInfo>
           <PageDividerWrapper>
@@ -721,7 +721,7 @@ const IndexPage = ({ data }) => {
             <div className="logoWrapper">
               <Img fluid={page.logo.fluid} alt={page.logo.title} />
             </div>
-            <Link>DÉCOUVREZ NOS ENGAGEMENTS</Link>
+            <Link to="/">DÉCOUVREZ NOS ENGAGEMENTS</Link>
           </PageDividerWrapper>
         </PostInnerWrapper>
       </PostOuterWrapper>
