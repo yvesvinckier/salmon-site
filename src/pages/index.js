@@ -426,6 +426,7 @@ const IndexPage = ({ data }) => {
   const typoRef = useRef(null)
   const titleRef = useRef(null)
   const imgWrapperRef = useRef(null)
+  // eslint-disable-next-line no-unused-vars
   const plugins = [DrawSVGPlugin];
 
   useEffect(() => {
