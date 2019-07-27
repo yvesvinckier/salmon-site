@@ -426,7 +426,7 @@ const IndexPage = ({ data }) => {
   const typoRef = useRef(null)
   const titleRef = useRef(null)
   const imgWrapperRef = useRef(null)
-  // const plugins = [DrawSVGPlugin];
+  const plugins = [DrawSVGPlugin];
 
   useEffect(() => {
     tl.to(imgWrapperRef.current, 2, { width: 0, transformOrigin: '100% 50%',ease: Expo.easeInOut })
