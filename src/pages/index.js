@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 
 // eslint-disable-next-line no-unused-vars
 import DrawSVGPlugin from "../utils/DrawSVGPlugin"
-import { TimelineMax, Expo } from "gsap/all";
+import { TimelineMax, Expo } from "gsap";
 
 import styled from 'styled-components'
 
