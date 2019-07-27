@@ -13,6 +13,16 @@ import Layout from '../components/layout'
 import BgImg from '../components/background'
 import SEO from '../components/seo'
 
+const WhiteBcg = styled.div`
+position: absolute;
+top: 0;
+right:0;
+width: 100vw;
+height: 100vh;
+z-index:100;
+background: #fff;
+`
+
 const IntroHome = styled.div`
   position: relative;
   @media screen and (min-width: ${props => props.theme.responsive.small}) {
@@ -29,7 +39,7 @@ const IntroHome = styled.div`
     width: 8em;
     z-index: 2;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
-      width: 30em;
+      width: 28em;
     }
     .strokeFill {
       fill: none;
@@ -63,7 +73,7 @@ const IntroHome = styled.div`
     transform: translate(-50%, -50%);
     z-index: 2;
     width: 100%;
-    line-height: 1.4em;
+    line-height: 1.3em;
     text-align: center;
     font-weight: 300;
     font-size: 0.7em;
@@ -71,7 +81,7 @@ const IntroHome = styled.div`
     text-transform: uppercase;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       top: 65%;
-      font-size: 1.4em;
+      font-size: 1.3em;
     }
   }
   .home-scroll-invite {
@@ -332,7 +342,7 @@ const PageDividerWrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    width: 30%;
+    width: 50%;
     padding-top: 0.2rem;
     letter-spacing: 0.10526em;
     text-transform: uppercase;
@@ -343,11 +353,11 @@ const PageDividerWrapper = styled.div`
   }
   p {
     position: absolute;
-    top: 55%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-    width: 30%;
+    width: 40%;
     letter-spacing: 0.05em;
     font-size: 1rem;
     font-weight: 300;
@@ -357,7 +367,7 @@ const PageDividerWrapper = styled.div`
   }
   .logoWrapper {
     position: absolute;
-    top: 70%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 8em;
@@ -369,7 +379,7 @@ const PageDividerWrapper = styled.div`
   a {
     color: #fff;
     position: absolute;
-    bottom: 15%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -415,13 +425,15 @@ const IndexPage = ({ data }) => {
   const rightPathRef = useRef(null)
   const typoRef = useRef(null)
   const titleRef = useRef(null)
+  const imgWrapperRef = useRef(null)
   // const plugins = [DrawSVGPlugin];
 
   useEffect(() => {
-    tl.from(leftPathRef.current, 2, { drawSVG: 0 ,ease: Expo.easeInOut})
+    tl.to(imgWrapperRef.current, 2, { width: 0, transformOrigin: '100% 50%',ease: Expo.easeInOut })
+    tl.from(leftPathRef.current, 2, { drawSVG: 0 ,ease: Expo.easeInOut},"-=1")
     tl.from(rightPathRef.current, 2, { drawSVG: 0,ease: Expo.easeInOut }, "-=2")
-    tl.from(typoRef.current, 2, { opacity: 0,ease: Expo.easeInOut }, "-=1.5")
-    tl.from(titleRef.current, 0.5, {opacity: 0, y: "20px",ease: Expo.easeInOut}, "-=1.6")
+    tl.from(typoRef.current, 2, { opacity: 0,ease: Expo.easeInOut }, "-=2")
+    tl.from(titleRef.current, 2, {opacity: 0, y: "20px",ease: Expo.easeInOut},"-=1.6")
   }, [])
   return (
     <Layout>
@@ -429,6 +441,7 @@ const IndexPage = ({ data }) => {
         <meta name="robots" content="noindex" />
       </Helmet>
       <SEO title="Home" />
+      <WhiteBcg ref={imgWrapperRef}></WhiteBcg>
       <IntroHome>
         <BgImg
           height={'100vh'}
