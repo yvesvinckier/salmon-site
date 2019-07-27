@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
 import Helmet from 'react-helmet'
+
+// eslint-disable-next-line no-unused-vars
+import DrawSVGPlugin from "../utils/DrawSVGPlugin"
+import { TimelineMax, Expo } from "gsap/all";
 
 import styled from 'styled-components'
 
@@ -25,7 +29,7 @@ const IntroHome = styled.div`
     width: 8em;
     z-index: 2;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
-      width: 34em;
+      width: 30em;
     }
     .strokeFill {
       fill: none;
@@ -59,15 +63,15 @@ const IntroHome = styled.div`
     transform: translate(-50%, -50%);
     z-index: 2;
     width: 100%;
-    line-height: 1.6em;
+    line-height: 1.4em;
     text-align: center;
     font-weight: 300;
     font-size: 0.7em;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
-      top: 68%;
-      font-size: 1.5em;
+      top: 65%;
+      font-size: 1.4em;
     }
   }
   .home-scroll-invite {
@@ -404,6 +408,21 @@ const PageDividerWrapper = styled.div`
 
 const IndexPage = ({ data }) => {
   const page = data.contentfulMowi
+  // Initiallized timelinemax
+  const tl = new TimelineMax()
+  // Setup refs to access the paths
+  const leftPathRef = useRef(null)
+  const rightPathRef = useRef(null)
+  const typoRef = useRef(null)
+  const titleRef = useRef(null)
+  // const plugins = [DrawSVGPlugin];
+
+  useEffect(() => {
+    tl.from(leftPathRef.current, 2, { drawSVG: 0 ,ease: Expo.easeInOut})
+    tl.from(rightPathRef.current, 2, { drawSVG: 0,ease: Expo.easeInOut }, "-=2")
+    tl.from(typoRef.current, 2, { opacity: 0,ease: Expo.easeInOut }, "-=1.5")
+    tl.from(titleRef.current, 0.5, {opacity: 0, y: "20px",ease: Expo.easeInOut}, "-=1.6")
+  }, [])
   return (
     <Layout>
       <Helmet>
@@ -427,9 +446,16 @@ const IndexPage = ({ data }) => {
           viewBox="0 0 284.861 92.108"
         >
           <path
+            ref={leftPathRef}
             className="strokeFill"
             d="M135.587,7.565c-14.561,0-26.365,11.804-26.365,26.365s11.804,26.365,26.365,26.365h-34.02"
           />
+            <path
+              ref={rightPathRef}
+              className="strokeFill"
+              d="M135.587,7.565c14.561,0,26.365,11.804,26.365,26.365s-11.804,26.365-26.365,26.365h34.02"
+          />
+          <g ref={typoRef}>
           <path
             className="whiteFill"
             d="M166.696,2.978h14.995l13.178,43.078l14.269-43.26h11.997l14.268,43.26L248.58,2.978h14.632l-21.72,64.072
@@ -444,11 +470,7 @@ const IndexPage = ({ data }) => {
             className="whiteFill"
             d="M269.207,2.978h13.996v63.617h-13.996V2.978z"
           />
-          <path
-            className="strokeFill"
-            d="M135.587,7.565c14.561,0,26.365,11.804,26.365,26.365s-11.804,26.365-26.365,26.365h34.02"
-          />
-          <g>
+          
             <path
               className="whiteFill"
               d="M215.267,85.695c-0.869-0.892-1.303-2.188-1.303-3.892v-6.874h1.269v6.823c0,1.395,0.314,2.434,0.943,3.119
@@ -489,7 +511,7 @@ const IndexPage = ({ data }) => {
           </g>
         </svg>
 
-        <h1>
+        <h1 ref ={titleRef}>
           DÉCOUVREZ LE PLAISIR ET LES BIENFAITS <br /> D’UN SAUMON UNIQUE ÉLEVÉ
           AVEC SOIN ET RESPECT
         </h1>
