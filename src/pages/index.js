@@ -12,6 +12,8 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import BgImg from '../components/background'
 import SEO from '../components/seo'
+import IconUnique from '../components/IconUnique'
+import ImageWrapper from '../components/ImageWrapper'
 
 const WhiteBcg = styled.div`
 position: absolute;
@@ -190,35 +192,11 @@ const PostInfo = styled.div`
     margin: 0 auto;
     width: calc(100% - 4em);
   }
-  .post-info__left {
-    margin: 0 0 1em 0;
-    width: 100%;
-    height: 385px;
-    div {
-      height: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
-    @media screen and (min-width: ${props => props.theme.responsive.small}) {
-      margin: 0;
-      flex: 0 1 45%;
-    }
-  }
   .post-info__right {
     width: 100%;
     color: black;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       flex: 0 1 45%;
-    }
-    svg {
-      width: 3em;
-      .blackStroke {
-        fill: none;
-        stroke: #020203;
-        stroke-width: 3;
-        stroke-linecap: round;
-        stroke-miterlimit: 10;
-      }
     }
 
     h3 {
@@ -417,7 +395,13 @@ const PageDividerWrapper = styled.div`
 `
 
 const IndexPage = ({ data }) => {
-  const page = data.contentfulMowi
+  const {
+    cover,
+    images,
+    pageDivider,
+    logo
+
+  } = data.contentfulMowi
   // Initiallized timelinemax
   const tl = new TimelineMax()
   // Setup refs to access the paths
@@ -446,9 +430,9 @@ const IndexPage = ({ data }) => {
       <IntroHome>
         <BgImg
           height={'100vh'}
-          fluid={page.cover.fluid}
-          alt={page.cover.title}
-          title={page.cover.title}
+          fluid={cover.fluid}
+          alt={cover.title}
+          title={cover.title}
         />
         <svg
           version="1.1"
@@ -537,53 +521,12 @@ const IndexPage = ({ data }) => {
       <PostOuterWrapper>
         <PostInnerWrapper>
           <PostInfo>
-            <div className="post-info__left">
-              <Img fluid={page.images[0].fluid} alt={page.images[0].title} />
-            </div>
+          <ImageWrapper images={images[0]} />
             <div className="post-info__right">
-              <svg
-                version="1.1"
-                id="Calque_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 89.32 50.74"
-              >
-                <path
-                  className="blackStroke"
-                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-              </svg>
+              <IconUnique />
               <h3>L’élevage</h3>
               <h4>Unique</h4>
-              <h2>parce que nous élevons nos Saumons avec soin</h2>
+              <h2>parce que nous élevons nos saumons avec soin</h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
                 diam nonummy nibh euismod tincidunt ut laoreet dolore magna
@@ -594,50 +537,9 @@ const IndexPage = ({ data }) => {
             </div>
           </PostInfo>
           <PostInfo>
-            <div className="post-info__left">
-              <Img fluid={page.images[1].fluid} alt={page.images[1].title} />
-            </div>
-            <div className="post-info__right">
-              <svg
-                version="1.1"
-                id="Calque_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 89.32 50.74"
-              >
-                <path
-                  className="blackStroke"
-                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-              </svg>
+        <ImageWrapper images={images[1]} />
+          <div className="post-info__right">
+            <IconUnique />
               <h3>Bien-être</h3>
               <h4>Healthy</h4>
               <h2>Nos Saumonssont un bienfait pour notre organisme </h2>
@@ -651,50 +553,9 @@ const IndexPage = ({ data }) => {
             </div>
           </PostInfo>
           <PostInfo>
-            <div className="post-info__left">
-              <Img fluid={page.images[2].fluid} alt={page.images[2].title} />
-            </div>
-            <div className="post-info__right">
-              <svg
-                version="1.1"
-                id="Calque_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 89.32 50.74"
-              >
-                <path
-                  className="blackStroke"
-                  d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-                <path
-                  className="blackStroke"
-                  d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-                />
-              </svg>
+            <ImageWrapper images={images[2]} />
+          <div className="post-info__right">
+            <IconUnique />
               <h3>Inspiration du moment</h3>
               <h4>Dégustations</h4>
               <h2>DES INSPIRATIONS POUR DÉGUSTER LE SAUMON TOUTE L’ANNÉE</h2>
@@ -708,7 +569,7 @@ const IndexPage = ({ data }) => {
             </div>
           </PostInfo>
           <PageDividerWrapper>
-            <BgImg height={'100vh'} fluid={page.pageDivider.fluid} />
+            <BgImg height={'100vh'} fluid={pageDivider.fluid} />
             <svg
               version="1.1"
               id="Calque_1"
@@ -759,7 +620,7 @@ const IndexPage = ({ data }) => {
               tation ullamcorper suscipit lobortis nisl ut.
             </p>
             <div className="logoWrapper">
-              <Img fluid={page.logo.fluid} alt={page.logo.title} />
+              <Img fluid={logo.fluid} alt={logo.title} />
             </div>
             <Link to="/">DÉCOUVREZ NOS ENGAGEMENTS</Link>
           </PageDividerWrapper>
