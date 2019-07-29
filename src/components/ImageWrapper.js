@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Waypoint } from 'react-waypoint';
 import Img from 'gatsby-image'
 
-const PostInfoLeft = styled.div`
+const PostInfoLeft = styled(animated.div)`
     margin: 0 0 1em 0;
     width: 100%;
     height: 385px;
@@ -24,19 +24,28 @@ const PostInfoLeft = styled.div`
       height: 100%;
       object-fit: cover;
       object-position: 50% 50%;
-      
-      /* transform: scale(1.2); */
     }
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       margin: 0;
       flex: 0 1 45%;
     }
 `
+const AnimImg = styled(animated.div)`
+  width: 100%;
+`
 const ImageWrapper = ({ images }) => {
     const [on, toggle] = useState(false);
     const ImageWrapperAnimation = useSpring({
         transform: on ? 'scaleX(0)' : 'scaleX(0.2)',
-        config: config.slow,
+        config: config.molasses,
+    })
+    const ScaleImageAnimation = useSpring({
+        transform: on ? 'scale(1)' : 'scale(1.2)',
+        config: config.molasses,
+    })
+    const TranslateImageAnimation = useSpring({
+        transform: on ? 'translate3d(0,0,0)' : 'translate3d(-7%,0,0)',
+        config: config.molasses,
     })
     return (
         <>
@@ -45,9 +54,11 @@ const ImageWrapper = ({ images }) => {
                     if (!on) toggle(true);
                 }}
             />
-            <PostInfoLeft>
+            <PostInfoLeft style={TranslateImageAnimation}>
                 <animated.div className="bcgWhite" style={ImageWrapperAnimation}></animated.div>
-                <Img fluid={images.fluid} alt={images.title} />
+                <AnimImg style={ScaleImageAnimation}>
+                    <Img fluid={images.fluid} alt={images.title} />
+                </AnimImg>
             </PostInfoLeft>
         </>
     )
