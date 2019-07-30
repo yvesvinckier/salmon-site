@@ -34,25 +34,27 @@ const AnimImg = styled(animated.div)`
   width: 100%;
 `
 const ImageWrapper = ({ images }) => {
-    const [on, toggle] = useState(false);
+    const [toggle, setToggle] = useState(false);
     const ImageWrapperAnimation = useSpring({
-        transform: on ? 'scaleX(0)' : 'scaleX(0.2)',
+        transform: toggle ? 'scaleX(0)' : 'scaleX(0.2)',
+        from: { transform: 'scaleX(0.2)' },
         config: config.molasses,
     })
     const ScaleImageAnimation = useSpring({
-        transform: on ? 'scale(1)' : 'scale(1.2)',
+        transform: toggle ? 'scale(1)' : 'scale(1.2)',
+        from: { transform: 'scale(1.2)' },
         config: config.molasses,
     })
     const TranslateImageAnimation = useSpring({
-        transform: on ? 'translate3d(0,0,0)' : 'translate3d(-7%,0,0)',
+        transform: toggle ? 'translate3d(0,0,0)' : 'translate3d(-7%,0,0)',
+        from: { transform: 'translate3d(-7%,0,0)' },
         config: config.molasses,
     })
     return (
         <>
             <Waypoint
-                onEnter={() => {
-                    if (!on) toggle(true);
-                }}
+                onEnter={() => setToggle(state => !state)}
+                onLeave={() => setToggle(state => !state)}
             />
             <PostInfoLeft style={TranslateImageAnimation}>
                 <animated.div className="bcgWhite" style={ImageWrapperAnimation}></animated.div>

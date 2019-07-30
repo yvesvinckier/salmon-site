@@ -8,10 +8,11 @@ const IconUniqueSVG = styled(animated.svg)`
 `
 
 const IconUnique = () => {
-    const [on, toggle] = useState(true);
+    const [toggle, setToggle] = useState(false);
     const IconUniqueAnimation = useSpring({
-        opacity: on ? 0 : 1,
-        x : on ? 100 : 0,
+        opacity: toggle ? 1 : 0,
+        x: toggle ? 0 : 100,
+        from: { opacity: 0, x: 100 },
         config: config.molasses,
     })
 
@@ -19,9 +20,9 @@ return (
         <>
     <Waypoint
       bottomOffset="10%"
-      onEnter={() => {
-      if (on) toggle(false);
-    }}
+      topOffset="10%"
+      onEnter={() => setToggle(state => !state)}
+      onLeave={() => setToggle(state => !state)}
     />
         <IconUniqueSVG
         viewBox="0 0 89.32 50.74"
