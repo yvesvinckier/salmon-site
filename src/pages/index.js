@@ -4,8 +4,8 @@ import Img from 'gatsby-image'
 import Helmet from 'react-helmet'
 
 // eslint-disable-next-line no-unused-vars
-import DrawSVGPlugin from "../utils/DrawSVGPlugin"
-import { TimelineMax, Expo } from "gsap";
+import DrawSVGPlugin from '../utils/DrawSVGPlugin'
+import { TimelineMax, Expo } from 'gsap'
 
 import styled from 'styled-components'
 
@@ -13,16 +13,19 @@ import Layout from '../components/layout'
 import BgImg from '../components/background'
 import SEO from '../components/seo'
 import IconUnique from '../components/IconUnique'
+import IconHealthy from '../components/IconHealthy'
+import IconChefHat from '../components/IconeChefHat'
+import IconLeaf from '../components/IconeLeaf'
 import ImageWrapper from '../components/ImageWrapper'
 
 const WhiteBcg = styled.div`
-position: absolute;
-top: 0;
-right:0;
-width: 100vw;
-height: 100vh;
-z-index:100;
-background: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background: #fff;
 `
 
 const IntroHome = styled.div`
@@ -181,6 +184,7 @@ const PostInfo = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  align-items: center;
   width: calc(100% - 2em);
   max-width: 1000px;
   padding: 2em;
@@ -220,7 +224,7 @@ const PostInfo = styled.div`
       text-transform: uppercase;
       font-size: 1.6rem;
       font-weight: 200;
-      line-height: 1.6rem;
+      line-height: 1.8rem;
       margin-top: 0.4rem;
     }
     p {
@@ -237,14 +241,14 @@ const PostInfo = styled.div`
       padding-left: 85px;
       position: relative;
       font-weight: 500;
-      transition: 0.708s ease-out 0.108s;
+      transition: padding-left 0.6s ease-in-out;
       font-size: 0.89474rem;
       line-height: 1.36842rem;
       letter-spacing: 0.5px;
       text-decoration: none;
       text-transform: uppercase;
       &::before {
-        transition: 0.6s ease-out;
+        transition: width 0.6s ease-in-out;
         content: '';
         display: inline-block;
         width: 72px;
@@ -273,55 +277,36 @@ const PageDividerWrapper = styled.div`
   div {
     max-height: 100vh;
   }
-  svg {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 3em;
+  .innerWrapper {
     z-index: 2;
-
-    .blackStroke {
-      fill: none;
-      stroke: #fff;
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-miterlimit: 10;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
   }
   h3 {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 100%;
     padding-top: 15px;
+    padding-bottom: 15px;
     letter-spacing: 0.10526em;
     text-transform: uppercase;
     font-size: 0.8rem;
     line-height: 1.3rem;
   }
   h4 {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 100%;
     text-transform: uppercase;
     font-weight: 900;
     font-size: 2rem;
     line-height: 2rem;
   }
   h2 {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
     width: 50%;
     padding-top: 0.2rem;
+    padding-bottom: 15px;
     letter-spacing: 0.10526em;
     text-transform: uppercase;
     font-size: 1.6rem;
@@ -330,38 +315,26 @@ const PageDividerWrapper = styled.div`
     margin-top: 0.4rem;
   }
   p {
-    position: absolute;
-    top: 57%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
     width: 40%;
     letter-spacing: 0.05em;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 300;
     line-height: 1.3rem;
     margin-top: 0.4rem;
     margin-bottom: 0.8rem;
+    padding-bottom: 2rem;
   }
   .logoWrapper {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 8em;
-    z-index: 2;
+    margin-bottom: 3rem;
     @media screen and (min-width: ${props => props.theme.responsive.small}) {
       width: 12em;
     }
   }
   a {
     color: #fff;
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
     display: inline-block;
+    position: relative;
     font-weight: 500;
     transition: 0.708s ease-out 0.108s;
     font-size: 0.89474rem;
@@ -395,13 +368,7 @@ const PageDividerWrapper = styled.div`
 `
 
 const IndexPage = ({ data }) => {
-  const {
-    cover,
-    images,
-    pageDivider,
-    logo
-
-  } = data.contentfulMowi
+  const { cover, images, pageDivider, logo } = data.contentfulMowi
   // Initiallized timelinemax
   const tl = new TimelineMax()
   // Setup refs to access the paths
@@ -411,14 +378,28 @@ const IndexPage = ({ data }) => {
   const titleRef = useRef(null)
   const imgWrapperRef = useRef(null)
   // eslint-disable-next-line no-unused-vars
-  const plugins = [DrawSVGPlugin];
+  const plugins = [DrawSVGPlugin]
 
   useEffect(() => {
-    tl.to(imgWrapperRef.current, 2, { width: 0, transformOrigin: '100% 50%',ease: Expo.easeInOut })
-    tl.from(leftPathRef.current, 2, { drawSVG: 0 ,ease: Expo.easeInOut},"-=1")
-    tl.from(rightPathRef.current, 2, { drawSVG: 0,ease: Expo.easeInOut }, "-=2")
-    tl.from(typoRef.current, 2, { opacity: 0,ease: Expo.easeInOut }, "-=2")
-    tl.from(titleRef.current, 2, {opacity: 0, y: "20px",ease: Expo.easeInOut},"-=1.6")
+    tl.to(imgWrapperRef.current, 2, {
+      width: 0,
+      transformOrigin: '100% 50%',
+      ease: Expo.easeInOut,
+    })
+    tl.from(leftPathRef.current, 2, { drawSVG: 0, ease: Expo.easeInOut }, '-=1')
+    tl.from(
+      rightPathRef.current,
+      2,
+      { drawSVG: 0, ease: Expo.easeInOut },
+      '-=2'
+    )
+    tl.from(typoRef.current, 2, { opacity: 0, ease: Expo.easeInOut }, '-=2')
+    tl.from(
+      titleRef.current,
+      2,
+      { opacity: 0, y: '20px', ease: Expo.easeInOut },
+      '-=1.6'
+    )
   }, [])
   return (
     <Layout>
@@ -448,27 +429,27 @@ const IndexPage = ({ data }) => {
             className="strokeFill"
             d="M135.587,7.565c-14.561,0-26.365,11.804-26.365,26.365s11.804,26.365,26.365,26.365h-34.02"
           />
-            <path
-              ref={rightPathRef}
-              className="strokeFill"
-              d="M135.587,7.565c14.561,0,26.365,11.804,26.365,26.365s-11.804,26.365-26.365,26.365h34.02"
+          <path
+            ref={rightPathRef}
+            className="strokeFill"
+            d="M135.587,7.565c14.561,0,26.365,11.804,26.365,26.365s-11.804,26.365-26.365,26.365h34.02"
           />
           <g ref={typoRef}>
-          <path
-            className="whiteFill"
-            d="M166.696,2.978h14.995l13.178,43.078l14.269-43.26h11.997l14.268,43.26L248.58,2.978h14.632l-21.72,64.072
+            <path
+              className="whiteFill"
+              d="M166.696,2.978h14.995l13.178,43.078l14.269-43.26h11.997l14.268,43.26L248.58,2.978h14.632l-21.72,64.072
 	h-12.178l-14.359-41.624L200.595,67.05h-12.178L166.696,2.978z"
-          />
-          <path
-            className="whiteFill"
-            d="M98.173,66.868H83.178L70,23.79L55.732,67.05H43.735L29.467,23.79L16.289,66.868H1.657l21.72-64.072h12.178
+            />
+            <path
+              className="whiteFill"
+              d="M98.173,66.868H83.178L70,23.79L55.732,67.05H43.735L29.467,23.79L16.289,66.868H1.657l21.72-64.072h12.178
 	L49.915,44.42L64.275,2.796h12.178L98.173,66.868z"
-          />
-          <path
-            className="whiteFill"
-            d="M269.207,2.978h13.996v63.617h-13.996V2.978z"
-          />
-          
+            />
+            <path
+              className="whiteFill"
+              d="M269.207,2.978h13.996v63.617h-13.996V2.978z"
+            />
+
             <path
               className="whiteFill"
               d="M215.267,85.695c-0.869-0.892-1.303-2.188-1.303-3.892v-6.874h1.269v6.823c0,1.395,0.314,2.434,0.943,3.119
@@ -509,7 +490,7 @@ const IndexPage = ({ data }) => {
           </g>
         </svg>
 
-        <h1 ref ={titleRef}>
+        <h1 ref={titleRef}>
           DÉCOUVREZ LE PLAISIR ET LES BIENFAITS <br /> D’UN SAUMON UNIQUE ÉLEVÉ
           AVEC SOIN ET RESPECT
         </h1>
@@ -521,7 +502,7 @@ const IndexPage = ({ data }) => {
       <PostOuterWrapper>
         <PostInnerWrapper>
           <PostInfo>
-          <ImageWrapper images={images[0]} />
+            <ImageWrapper images={images[0]} />
             <div className="post-info__right">
               <IconUnique />
               <h3>L’élevage</h3>
@@ -537,9 +518,9 @@ const IndexPage = ({ data }) => {
             </div>
           </PostInfo>
           <PostInfo>
-        <ImageWrapper images={images[1]} />
-          <div className="post-info__right">
-            <IconUnique />
+            <ImageWrapper images={images[1]} />
+            <div className="post-info__right">
+              <IconHealthy />
               <h3>Bien-être</h3>
               <h4>Healthy</h4>
               <h2>Nos Saumonssont un bienfait pour notre organisme </h2>
@@ -554,8 +535,8 @@ const IndexPage = ({ data }) => {
           </PostInfo>
           <PostInfo>
             <ImageWrapper images={images[2]} />
-          <div className="post-info__right">
-            <IconUnique />
+            <div className="post-info__right">
+              <IconChefHat />
               <h3>Inspiration du moment</h3>
               <h4>Dégustations</h4>
               <h2>DES INSPIRATIONS POUR DÉGUSTER LE SAUMON TOUTE L’ANNÉE</h2>
@@ -570,59 +551,25 @@ const IndexPage = ({ data }) => {
           </PostInfo>
           <PageDividerWrapper>
             <BgImg height={'100vh'} fluid={pageDivider.fluid} />
-            <svg
-              version="1.1"
-              id="Calque_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 89.32 50.74"
-            >
-              <path
-                className="blackStroke"
-                d="M6.469,42.197c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-              />
-              <path
-                className="blackStroke"
-                d="M6.469,33.486c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-              />
-              <path
-                className="blackStroke"
-                d="M6.469,24.775c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-              />
-              <path
-                className="blackStroke"
-                d="M6.469,16.064c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-              />
-              <path
-                className="blackStroke"
-                d="M6.469,7.353c4.087,0,6.155,0.827,8.154,1.627c1.815,0.727,3.53,1.413,7.04,1.413
-	c3.511,0,5.226-0.686,7.042-1.413c2-0.8,4.068-1.627,8.157-1.627s6.157,0.827,8.157,1.627c1.816,0.727,3.532,1.413,7.043,1.413
-	s5.228-0.686,7.045-1.413c2-0.8,4.068-1.627,8.158-1.627c4.089,0,6.157,0.827,8.157,1.627c1.817,0.727,3.533,1.413,7.045,1.413"
-              />
-            </svg>
-            <h3>Engagement</h3>
-            <h4>Respect</h4>
-            <h2>L'impact sur l'environnement est une préoccupation majeure</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ullamcorper suscipit lobortis nisl ut.
-            </p>
-            <div className="logoWrapper">
-              <Img fluid={logo.fluid} alt={logo.title} />
+            <div className="innerWrapper">
+              <IconLeaf />
+              <h3>Engagement</h3>
+              <h4>Respect</h4>
+              <h2>
+                L'impact sur l'environnement <br /> est une préoccupation
+                majeure
+              </h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
+                diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
+                nostrud exerci tation ullamcorper suscipit lobortis nisl ut.
+              </p>
+              <div className="logoWrapper">
+                <Img fluid={logo.fluid} alt={logo.title} />
+              </div>
+              <Link to="/">DÉCOUVREZ NOS ENGAGEMENTS</Link>
             </div>
-            <Link to="/">DÉCOUVREZ NOS ENGAGEMENTS</Link>
           </PageDividerWrapper>
         </PostInnerWrapper>
       </PostOuterWrapper>
